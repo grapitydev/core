@@ -1,6 +1,7 @@
-import type { Spec, SpecVersion } from "./spec";
+import type { Spec, SpecType } from "./spec";
+import type { SpecVersion } from "./spec-version";
 import type { CompatReport } from "./compat-report";
-import type { SpecType } from "./spec";
+import type { AuditAction } from "./api";
 
 export interface SpecStore {
   getSpec(name: string): Promise<Spec | null>;
@@ -19,6 +20,13 @@ export interface SpecStore {
     name: string,
     semver: string
   ): Promise<CompatReport | null>;
+  logAudit(
+    action: AuditAction,
+    actor: string,
+    specName: string,
+    version: string | undefined,
+    details: Record<string, unknown> | undefined
+  ): Promise<void>;
 }
 
 export interface SpecFilters {
