@@ -1,0 +1,28 @@
+{
+  "name": "@grapity/core",
+  "version": "0.0.1",
+  "description": "Shared TypeScript types and schemas for the Grapity platform",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.0",
+    "drizzle-kit": "^0.31.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.0"
+  }
+}
