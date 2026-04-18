@@ -29,26 +29,21 @@ The Grapity platform has three independent repos that depend on each other:
 
 ### Linking all packages
 
-From any repo, you can link local packages for development:
+The registry and CLI use `link:@grapity/core` in their package.json to resolve this package locally. After building, run `bun link` to register it globally so other repos can discover it:
 
 ```bash
-# 1. Build and link core
 cd ~/workspace/grapity/core
 bun install && bun run build
 bun link
 
-# 2. Link and build registry
+# Then in registry/
 cd ~/workspace/grapity/registry
-bun install
-bun link @grapity/core
+bun install   # resolves @grapity/core via link:
 bun run build
-bun link
 
-# 3. Link and build cli
+# Then in cli/
 cd ~/workspace/grapity/cli
-bun install
-bun link @grapity/core
-bun link @grapity/registry
+bun install   # resolves both via link:
 bun run build
 ```
 
@@ -62,24 +57,9 @@ ls -la node_modules/@grapity/core
 
 ### Unlinking (restore npm versions)
 
-Always unlink before pushing to ensure CI resolves packages from npm:
+The `link:` protocol in registry/cli package.json is for local development only. Before pushing to CI, ensure those repos use version ranges (`^0.0.1`) instead of `link:@grapity/core`. CI expects version ranges.
 
-```bash
-# In registry/
-bun unlink @grapity/core && bun install
-
-# In cli/
-bun unlink @grapity/core @grapity/registry && bun install
-```
-
-### After changes in core
-
-```bash
-cd ~/workspace/grapity/core
-bun run build   # Rebuild. Symlinks pick up changes automatically.
-```
-
-## Publishing
+### After changes
 
 Publishing is handled by GitHub Actions. Do not publish manually.
 
