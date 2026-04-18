@@ -23,7 +23,10 @@ export type {
   DeprecateVersionResponse,
   HealthResponse,
   ApiError,
+  AuditAction,
+  AuditLogEntry,
 } from "./api";
 
 export { specs } from "./schema/specs";
 export { specVersions } from "./schema/spec-versions";
+export { auditLog } from "./schema/audit-log";

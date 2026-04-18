@@ -13,5 +13,7 @@ export interface SpecVersion {
   compatibility?: CompatReport;
   sunsetDate?: Date;
   previousVersion?: string;
+  forceReason?: string;
+  isPrerelease: boolean;
   createdAt: Date;
 }

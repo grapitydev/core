@@ -18,5 +18,9 @@ export const specVersions = sqliteTable("spec_versions", {
     .default("active"),
   sunsetDate: integer("sunset_date", { mode: "timestamp" }),
   previousVersion: text("previous_version"),
+  forceReason: text("force_reason"),
+  isPrerelease: integer("is_prerelease", { mode: "boolean" })
+    .notNull()
+    .default(false),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });

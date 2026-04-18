@@ -1,4 +1,5 @@
-import type { Spec, SpecVersion, SpecType } from "./spec";
+import type { Spec, SpecType } from "./spec";
+import type { SpecVersion } from "./spec-version";
 import type { CompatReport } from "./compat-report";
 
 export interface PushSpecRequest {
@@ -11,6 +12,7 @@ export interface PushSpecRequest {
   tags?: string[];
   gitRef?: string;
   pushedBy?: string;
+  prerelease?: boolean;
   force?: boolean;
   reason?: string;
 }
@@ -75,4 +77,20 @@ export interface ApiError {
   error: string;
   message: string;
   statusCode: number;
+}
+
+export type AuditAction =
+  | "spec.push"
+  | "spec.push.force"
+  | "spec.deprecate"
+  | "spec.sunset";
+
+export interface AuditLogEntry {
+  id: string;
+  action: AuditAction;
+  actor: string;
+  specName: string;
+  version?: string;
+  details?: Record<string, unknown>;
+  createdAt: Date;
 }
