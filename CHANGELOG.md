@@ -1,0 +1,8 @@
+# Changelog
+
+## [0.0.2](https://github.com/grapitydev/core/compare/core-v0.0.1...core-v0.0.2) (2026-04-25)
+
+
+### Bug Fixes
+
+* update README to reflect current package scope ([b98e5fe](https://github.com/grapitydev/core/commit/b98e5fedaf9f19e82f2a6c951d10e12024fc2d59))
