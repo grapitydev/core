@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/grapitydev/core/compare/v0.0.3...v0.0.4) (2026-04-25)
+
+
+### Bug Fixes
+
+* switch to ESM-only with type: module and .js output ([b50a5eb](https://github.com/grapitydev/core/commit/b50a5eb0eaca3d2e3a269179d0c0679182cfe304))
+
 ## [0.0.3](https://github.com/grapitydev/core/compare/v0.0.2...v0.0.3) (2026-04-25)
 
 
