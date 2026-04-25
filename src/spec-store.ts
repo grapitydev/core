@@ -10,12 +10,6 @@ export interface SpecStore {
   listSpecs(filters?: SpecFilters): Promise<Spec[]>;
   listVersions(name: string): Promise<SpecVersion[]>;
   pushSpecVersion(spec: Spec, version: SpecVersion): Promise<SpecVersion>;
-  deprecateVersion(
-    name: string,
-    semver: string,
-    sunsetDate: Date
-  ): Promise<SpecVersion>;
-  sunsetVersion(name: string, semver: string): Promise<SpecVersion>;
   getCompatReport(
     name: string,
     semver: string

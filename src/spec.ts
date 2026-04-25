@@ -1,5 +1,4 @@
 export type SpecType = "openapi" | "asyncapi";
-export type SpecStatus = "active" | "deprecated" | "sunset";
 
 export interface Spec {
   id: string;

@@ -1,4 +1,3 @@
-import type { SpecStatus } from "./spec";
 import type { CompatReport } from "./compat-report";
 
 export interface SpecVersion {
@@ -9,9 +8,7 @@ export interface SpecVersion {
   checksum: string;
   gitRef?: string;
   pushedBy?: string;
-  status: SpecStatus;
   compatibility?: CompatReport;
-  sunsetDate?: Date;
   previousVersion?: string;
   forceReason?: string;
   isPrerelease: boolean;

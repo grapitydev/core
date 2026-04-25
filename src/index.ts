@@ -1,4 +1,4 @@
-export type { Spec, SpecType, SpecStatus } from "./spec";
+export type { Spec, SpecType } from "./spec";
 export type { SpecVersion } from "./spec-version";
 export type {
   CompatReport,
@@ -9,24 +9,18 @@ export type {
 export type { PolicyProfile, PluginConfig } from "./policy-profile";
 export type { SpecStore, SpecFilters } from "./spec-store";
 export type {
+  AuditAction,
+  AuditLogEntry,
+  PublicSpecVersion,
   PushSpecRequest,
   PushSpecResponse,
   ValidateSpecRequest,
   ValidateSpecResponse,
-  ListSpecsRequest,
   ListSpecsResponse,
   GetSpecResponse,
   ListVersionsResponse,
   GetVersionResponse,
   GetCompatReportResponse,
-  DeprecateVersionRequest,
-  DeprecateVersionResponse,
   HealthResponse,
-  ApiError,
-  AuditAction,
-  AuditLogEntry,
 } from "./api";
 
-export { specs } from "./schema/specs";
-export { specVersions } from "./schema/spec-versions";
-export { auditLog } from "./schema/audit-log";
