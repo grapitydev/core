@@ -1,6 +1,6 @@
 {
   "name": "@grapity/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shared TypeScript types and interfaces for the Grapity platform",
   "license": "Apache-2.0",
   "repository": {
