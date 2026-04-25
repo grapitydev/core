@@ -13,7 +13,7 @@ npm install @grapity/core
 ## Usage
 
 ```typescript
-import { Spec, SpecVersion, CompatReport, PushSpecResponse } from "@grapity/core";
+import type { Spec, SpecVersion, CompatReport, PushSpecResponse } from "@grapity/core";
 ```
 
 ## License
