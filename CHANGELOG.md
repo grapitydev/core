@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/grapitydev/core/compare/v0.0.4...v0.1.0) (2026-04-29)
+
+
+### Features
+
+* add PaginationMeta and wrap response types in data envelope ([97e467f](https://github.com/grapitydev/core/commit/97e467f9165db3db1f347c36f5905720a9554f20))
+
 ## [0.0.4](https://github.com/grapitydev/core/compare/v0.0.3...v0.0.4) (2026-04-25)
 
 
