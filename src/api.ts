@@ -18,6 +18,13 @@ export interface AuditLogEntry {
 // never embedded in JSON responses per API design guidelines.
 export type PublicSpecVersion = Omit<SpecVersion, "content">;
 
+export interface PaginationMeta {
+  hasMore: boolean;
+  limit: number;
+  offset: number;
+  total: number;
+}
+
 export interface PushSpecRequest {
   content: string;
   name: string;
@@ -35,10 +42,12 @@ export interface PushSpecRequest {
 }
 
 export interface PushSpecResponse {
-  spec: Spec;
-  version: PublicSpecVersion;
-  compatReport?: CompatReport;
-  isNewSpec: boolean;
+  data: {
+    compatReport?: CompatReport;
+    isNewSpec: boolean;
+    spec: Spec;
+    version: PublicSpecVersion;
+  };
 }
 
 export interface ValidateSpecRequest {
@@ -46,27 +55,36 @@ export interface ValidateSpecRequest {
 }
 
 export interface ValidateSpecResponse {
-  valid: boolean;
-  errors?: string[];
-  warnings?: string[];
-  compatReport?: CompatReport;
+  data: {
+    compatReport?: CompatReport;
+    errors?: string[];
+    valid: boolean;
+    warnings?: string[];
+  };
 }
 
-export type ListSpecsResponse = Spec[];
+export interface ListSpecsResponse {
+  data: Spec[];
+}
 
 export interface GetSpecResponse {
-  spec: Spec;
-  latestVersion?: PublicSpecVersion;
+  data: {
+    latestVersion?: PublicSpecVersion;
+    spec: Spec;
+  };
 }
 
-export type ListVersionsResponse = PublicSpecVersion[];
+export interface ListVersionsResponse {
+  data: PublicSpecVersion[];
+  pagination: PaginationMeta;
+}
 
 export interface GetVersionResponse {
-  version: PublicSpecVersion;
+  data: PublicSpecVersion;
 }
 
 export interface GetCompatReportResponse {
-  compatReport: CompatReport;
+  data: CompatReport;
 }
 
 export interface HealthResponse {

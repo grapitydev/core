@@ -8,7 +8,10 @@ export interface SpecStore {
   getSpecVersion(name: string, semver: string): Promise<SpecVersion | null>;
   getLatestVersion(name: string): Promise<SpecVersion | null>;
   listSpecs(filters?: SpecFilters): Promise<Spec[]>;
-  listVersions(name: string): Promise<SpecVersion[]>;
+  listVersions(
+    name: string,
+    options?: { limit?: number; offset?: number }
+  ): Promise<{ versions: SpecVersion[]; total: number }>;
   pushSpecVersion(spec: Spec, version: SpecVersion): Promise<SpecVersion>;
   getCompatReport(
     name: string,
