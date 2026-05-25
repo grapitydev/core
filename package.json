@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Shared TypeScript types and interfaces for the Grapity platform",
   "license": "Apache-2.0",
+  "homepage": "https://grapity.dev/docs/",
   "repository": {
     "type": "git",
     "url": "https://github.com/grapitydev/core"

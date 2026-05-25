@@ -2,6 +2,8 @@
 
 Shared TypeScript types and interfaces for the Grapity platform.
 
+**Documentation:** [grapity.dev/docs](https://grapity.dev/docs/)
+
 This package is the foundation that all other Grapity packages depend on. It contains no runtime logic, only type definitions and API contract types.
 
 ## Installation
