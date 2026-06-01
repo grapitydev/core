@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0](https://github.com/grapitydev/core/compare/v0.1.0...v0.2.0) (2026-06-01)
+
+
+### Features
+
+* add Apache-2.0 LICENSE file ([2cbc976](https://github.com/grapitydev/core/commit/2cbc976f2acf1666ce3293bec99dbed2b5cca7d0))
+* add documentation links ([5a80706](https://github.com/grapitydev/core/commit/5a8070607153c78939f64247311b143a9c70ab47))
+* add gateway log types, caller identification, and provision interfaces ([dd5b1dd](https://github.com/grapitydev/core/commit/dd5b1dda0b575337eea2c8be33d9f39031b24419))
+
 ## [0.1.0](https://github.com/grapitydev/core/compare/v0.0.4...v0.1.0) (2026-04-29)
 
 
