@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/grapitydev/core/compare/v0.2.0...v0.3.0) (2026-06-05)
+
+
+### Features
+
+* add change category to compat report and remove explicit version from push request ([a703939](https://github.com/grapitydev/core/commit/a7039399735acaf498a140bf7d5202f91588edfe))
+* add SpecListItem with latest version to list response ([9a0720f](https://github.com/grapitydev/core/commit/9a0720fdb7c625fef2a5bf4843c0ad008078846d))
+
 ## [0.2.0](https://github.com/grapitydev/core/compare/v0.1.0...v0.2.0) (2026-06-01)
 
 
