@@ -13,6 +13,7 @@ export interface BreakingChange {
   rule: string;
   description: string;
   path: string;
+  category: "structural" | "documentation";
   originalValue?: string;
   newValue?: string;
   affectedConsumers?: string[];
@@ -23,4 +24,5 @@ export interface SafeChange {
   rule: string;
   description: string;
   path: string;
+  category: "structural" | "documentation";
 }

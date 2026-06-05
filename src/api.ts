@@ -38,7 +38,6 @@ export interface PushSpecRequest {
   tags?: string[];
   gitRef?: string;
   pushedBy?: string;
-  version?: string;
   prerelease?: boolean;
   force?: boolean;
   reason?: string;
