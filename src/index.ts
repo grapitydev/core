@@ -39,6 +39,7 @@ export type {
   PublicSpecVersion,
   PushSpecRequest,
   PushSpecResponse,
+  SpecListItem,
   ValidateSpecRequest,
   ValidateSpecResponse,
   PublicGatewayConfigVersion,

@@ -65,8 +65,12 @@ export interface ValidateSpecResponse {
   };
 }
 
+export interface SpecListItem extends Spec {
+  latestVersion?: PublicSpecVersion;
+}
+
 export interface ListSpecsResponse {
-  data: Spec[];
+  data: SpecListItem[];
 }
 
 export interface GetSpecResponse {
