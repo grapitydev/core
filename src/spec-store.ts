@@ -1,7 +1,8 @@
 import type { Spec, SpecType } from "./spec";
 import type { SpecVersion } from "./spec-version";
 import type { CompatReport } from "./compat-report";
-import type { AuditAction } from "./api";
+
+export type AuditAction = "spec.push" | "spec.push.force" | "spec.delete";
 
 export interface SpecStore {
   getSpec(name: string): Promise<Spec | null>;
@@ -13,6 +14,7 @@ export interface SpecStore {
     options?: { limit?: number; offset?: number }
   ): Promise<{ versions: SpecVersion[]; total: number }>;
   pushSpecVersion(spec: Spec, version: SpecVersion): Promise<SpecVersion>;
+  deleteSpec(name: string): Promise<boolean>;
   getCompatReport(
     name: string,
     semver: string
