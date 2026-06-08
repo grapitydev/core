@@ -290,7 +290,21 @@
                       "pushedBy": "github-actions[bot]",
                       "previousVersion": "1.1.0",
                       "isPrerelease": false,
-                      "createdAt": "2026-06-07T14:00:00.000Z"
+                      "createdAt": "2026-06-07T14:00:00.000Z",
+                      "compatibility": {
+                        "previousVersion": "1.1.0",
+                        "classification": "minor",
+                        "suggestedVersion": "1.2.0",
+                        "breakingChanges": [],
+                        "safeChanges": [
+                          {
+                            "id": "chg-1",
+                            "rule": "endpoint-added",
+                            "description": "Endpoint GET /payments/{id}/refunds added",
+                            "path": "/payments/{id}/refunds/GET"
+                          }
+                        ]
+                      }
                     },
                     "compatReport": {
                       "previousVersion": "1.1.0",
@@ -2669,6 +2683,7 @@
         }
       },
       "BreakingChange": {
+        "title": "BreakingChange",
         "type": "object",
         "required": [
           "id",
@@ -2724,6 +2739,7 @@
         }
       },
       "SafeChange": {
+        "title": "SafeChange",
         "type": "object",
         "required": [
           "id",
@@ -2908,7 +2924,8 @@
             "required": [
               "isNewSpec",
               "spec",
-              "version"
+              "version",
+              "compatReport"
             ],
             "properties": {
               "compatReport": {

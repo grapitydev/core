@@ -474,6 +474,7 @@ export interface components {
              */
             suggestedVersion?: string;
         };
+        /** BreakingChange */
         BreakingChange: {
             /** @example chg-2 */
             id: string;
@@ -503,6 +504,7 @@ export interface components {
              */
             affectedConsumers?: string[];
         };
+        /** SafeChange */
         SafeChange: {
             /** @example chg-1 */
             id: string;
@@ -602,7 +604,7 @@ export interface components {
         };
         PushSpecResponse: {
             data: {
-                compatReport?: components["schemas"]["CompatReport"];
+                compatReport: components["schemas"]["CompatReport"];
                 /** @description True if this is the first version of this spec */
                 isNewSpec: boolean;
                 spec: components["schemas"]["Spec"];
@@ -986,18 +988,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1081,31 +1086,37 @@ export interface operations {
                     "application/json": components["schemas"]["ListSpecsResponse"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "unauthorized",
-             *       "message": "Invalid API key",
-             *       "statusCode": 401
-             *     }
-             */
+            /** @description Unauthorized */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1173,7 +1184,21 @@ export interface operations {
                      *           "pushedBy": "github-actions[bot]",
                      *           "previousVersion": "1.1.0",
                      *           "isPrerelease": false,
-                     *           "createdAt": "2026-06-07T14:00:00.000Z"
+                     *           "createdAt": "2026-06-07T14:00:00.000Z",
+                     *           "compatibility": {
+                     *             "previousVersion": "1.1.0",
+                     *             "classification": "minor",
+                     *             "suggestedVersion": "1.2.0",
+                     *             "breakingChanges": [],
+                     *             "safeChanges": [
+                     *               {
+                     *                 "id": "chg-1",
+                     *                 "rule": "endpoint-added",
+                     *                 "description": "Endpoint GET /payments/{id}/refunds added",
+                     *                 "path": "/payments/{id}/refunds/GET"
+                     *               }
+                     *             ]
+                     *           }
                      *         },
                      *         "compatReport": {
                      *           "previousVersion": "1.1.0",
@@ -1217,6 +1242,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1266,18 +1298,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1342,6 +1377,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1361,18 +1403,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1404,6 +1449,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1423,18 +1475,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1515,6 +1570,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1534,18 +1596,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1618,6 +1683,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1637,18 +1709,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1702,6 +1777,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1721,18 +1803,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1767,6 +1852,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1786,18 +1878,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1832,6 +1927,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1851,18 +1953,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1902,6 +2007,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1921,18 +2033,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -1972,6 +2087,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -1991,18 +2113,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2059,6 +2184,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -2078,18 +2210,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2126,31 +2261,37 @@ export interface operations {
                     "application/json": components["schemas"]["ListGatewayConfigsResponse"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "unauthorized",
-             *       "message": "Invalid API key",
-             *       "statusCode": 401
-             *     }
-             */
+            /** @description Unauthorized */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2313,6 +2454,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -2348,18 +2496,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2406,6 +2557,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -2425,18 +2583,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2517,6 +2678,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -2536,18 +2704,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2632,6 +2803,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -2651,18 +2829,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2743,31 +2924,37 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "unauthorized",
-             *       "message": "Invalid API key",
-             *       "statusCode": 401
-             *     }
-             */
+            /** @description Unauthorized */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2835,31 +3022,37 @@ export interface operations {
                     "application/json": components["schemas"]["ListGatewayLogsResponse"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "unauthorized",
-             *       "message": "Invalid API key",
-             *       "statusCode": 401
-             *     }
-             */
+            /** @description Unauthorized */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2905,31 +3098,37 @@ export interface operations {
                     "application/json": components["schemas"]["GetGatewayLogStatsResponse"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "unauthorized",
-             *       "message": "Invalid API key",
-             *       "statusCode": 401
-             *     }
-             */
+            /** @description Unauthorized */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
@@ -2982,6 +3181,13 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
@@ -3001,18 +3207,21 @@ export interface operations {
                     "application/json": components["schemas"]["ApiError"];
                 };
             };
-            /**
-             * @example {
-             *       "error": "internal_server_error",
-             *       "message": "An unexpected error occurred",
-             *       "statusCode": 500
-             *     }
-             */
+            /** @description Internal server error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
             };
         };
     };
