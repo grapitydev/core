@@ -1,22 +1,36 @@
 # @grapity/core
 
-Shared TypeScript types and interfaces for the Grapity platform.
+Shared types and the Registry API contract for the Grapity platform.
 
-**Documentation:** [grapity.dev/docs](https://grapity.dev/docs/)
+This package contains the `openapi.yaml` contract and its generated TypeScript types, alongside hand-written domain types used by `@grapity/registry`, `@grapity/hub`, and `@grapity/cli`.
 
-This package is the foundation that all other Grapity packages depend on. It contains no runtime logic, only type definitions and API contract types.
+## What's inside
 
-## Installation
+- `openapi.yaml` — the Registry API contract (source of truth)
+- `src/generated/api.ts` — TypeScript types generated from `openapi.yaml`
+- `src/*.ts` — hand-written domain types
+
+## Regenerating types
+
+After editing `openapi.yaml`:
 
 ```bash
-npm install @grapity/core
+bun run generate
 ```
 
 ## Usage
 
 ```typescript
-import type { Spec, SpecVersion, CompatReport, PushSpecResponse } from "@grapity/core";
+// Generated schema types (from openapi.yaml)
+import type { PushSpecResponse, CompatReport } from "@grapity/core";
+
+// Domain types (hand-written)
+import type { Spec, SpecVersion } from "@grapity/core";
 ```
+
+## Documentation
+
+[grapity.dev/docs](https://grapity.dev/docs/)
 
 ## License
 
