@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/grapitydev/core/compare/v0.3.0...v0.4.0) (2026-06-08)
+
+
+### Features
+
+* generate types from openapi.yaml and add deleteSpec to store interface ([7dbebba](https://github.com/grapitydev/core/commit/7dbebbad9a8ea8859868ede51ba857cca49296ce))
+
+
+### Bug Fixes
+
+* make compatReport required and add schema titles ([de44509](https://github.com/grapitydev/core/commit/de44509ccea3fe14c982f22e14bbf141d128a8dd))
+
 ## [0.3.0](https://github.com/grapitydev/core/compare/v0.2.0...v0.3.0) (2026-06-05)
 
 
