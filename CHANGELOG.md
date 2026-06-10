@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/grapitydev/core/compare/v0.4.0...v0.5.0) (2026-06-10)
+
+
+### Features
+
+* add compare versions endpoint to OpenAPI spec ([f4e4055](https://github.com/grapitydev/core/commit/f4e4055f25b5b03d5ab6c938aa60954ec0786bdf))
+
 ## [0.4.0](https://github.com/grapitydev/core/compare/v0.3.0...v0.4.0) (2026-06-08)
 
 
