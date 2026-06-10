@@ -209,6 +209,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/specs/{name}/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Compare two versions of a spec
+         * @description Returns an incremental comparison between two versions. All versions between the two endpoints are included, ordered oldest to newest. The response contains the precomputed compatibility report for each step.
+         */
+        get: operations["compareVersions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/gateway-configs": {
         parameters: {
             query?: never;
@@ -644,6 +664,24 @@ export interface components {
         };
         GetCompatReportResponse: {
             data: components["schemas"]["CompatReport"];
+        };
+        CompareStep: {
+            /** @example 1.1.0 */
+            version: string;
+            /** @example 1.0.0 */
+            previousVersion: string;
+            classification: components["schemas"]["VersionClassification"];
+            breakingChanges: components["schemas"]["BreakingChange"][];
+            safeChanges: components["schemas"]["SafeChange"][];
+        };
+        CompareVersionsResponse: {
+            data: {
+                /** @example 1.0.0 */
+                from: string;
+                /** @example 1.3.0 */
+                to: string;
+                steps: components["schemas"]["CompareStep"][];
+            };
         };
         GatewayConfig: {
             /**
@@ -2204,6 +2242,138 @@ export interface operations {
                      * @example {
                      *       "error": "not_found",
                      *       "message": "Compat report not found for payments-api@1.0.0",
+                     *       "statusCode": 404
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "internal_error",
+                     *       "message": "Internal server error",
+                     *       "statusCode": 500
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    compareVersions: {
+        parameters: {
+            query: {
+                /**
+                 * @description Starting version (inclusive). If newer than `to`, the order is normalized.
+                 * @example 1.0.0
+                 */
+                from: string;
+                /**
+                 * @description Ending version (inclusive). If older than `from`, the order is normalized.
+                 * @example 1.3.0
+                 */
+                to: string;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description URL-friendly spec identifier
+                 * @example payments-api
+                 */
+                name: components["parameters"]["specName"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Incremental comparison between versions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "data": {
+                     *         "from": "1.0.0",
+                     *         "to": "1.3.0",
+                     *         "steps": [
+                     *           {
+                     *             "version": "1.1.0",
+                     *             "previousVersion": "1.0.0",
+                     *             "classification": "minor",
+                     *             "breakingChanges": [],
+                     *             "safeChanges": [
+                     *               {
+                     *                 "id": "chg-1",
+                     *                 "rule": "endpoint-added",
+                     *                 "description": "Endpoint GET /payments/{id}/refunds added",
+                     *                 "path": "/payments/{id}/refunds/GET",
+                     *                 "category": "structural"
+                     *               }
+                     *             ]
+                     *           },
+                     *           {
+                     *             "version": "1.2.0",
+                     *             "previousVersion": "1.1.0",
+                     *             "classification": "patch",
+                     *             "breakingChanges": [],
+                     *             "safeChanges": []
+                     *           },
+                     *           {
+                     *             "version": "1.3.0",
+                     *             "previousVersion": "1.2.0",
+                     *             "classification": "major",
+                     *             "breakingChanges": [
+                     *               {
+                     *                 "id": "chg-2",
+                     *                 "rule": "response-property-removed",
+                     *                 "description": "Response property 'userId' was removed from GET /users/{id}",
+                     *                 "path": "/users/{id}/GET/response/200/userId",
+                     *                 "category": "structural"
+                     *               }
+                     *             ],
+                     *             "safeChanges": []
+                     *           }
+                     *         ]
+                     *       }
+                     *     }
+                     */
+                    "application/json": components["schemas"]["CompareVersionsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "unauthorized",
+                     *       "message": "Invalid API key",
+                     *       "statusCode": 401
+                     *     }
+                     */
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+            /** @description Spec or version not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": "not_found",
+                     *       "message": "Version 1.3.0 not found for spec \"payments-api\"",
                      *       "statusCode": 404
                      *     }
                      */

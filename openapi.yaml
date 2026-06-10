@@ -1315,6 +1315,145 @@
         }
       }
     },
+    "/v1/specs/{name}/compare": {
+      "get": {
+        "operationId": "compareVersions",
+        "tags": [
+          "specs"
+        ],
+        "summary": "Compare two versions of a spec",
+        "description": "Returns an incremental comparison between two versions. All versions between the two endpoints are included, ordered oldest to newest. The response contains the precomputed compatibility report for each step.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/specName"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+            },
+            "description": "Starting version (inclusive). If newer than `to`, the order is normalized.",
+            "example": "1.0.0"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+            },
+            "description": "Ending version (inclusive). If older than `from`, the order is normalized.",
+            "example": "1.3.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Incremental comparison between versions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareVersionsResponse"
+                },
+                "example": {
+                  "data": {
+                    "from": "1.0.0",
+                    "to": "1.3.0",
+                    "steps": [
+                      {
+                        "version": "1.1.0",
+                        "previousVersion": "1.0.0",
+                        "classification": "minor",
+                        "breakingChanges": [],
+                        "safeChanges": [
+                          {
+                            "id": "chg-1",
+                            "rule": "endpoint-added",
+                            "description": "Endpoint GET /payments/{id}/refunds added",
+                            "path": "/payments/{id}/refunds/GET",
+                            "category": "structural"
+                          }
+                        ]
+                      },
+                      {
+                        "version": "1.2.0",
+                        "previousVersion": "1.1.0",
+                        "classification": "patch",
+                        "breakingChanges": [],
+                        "safeChanges": []
+                      },
+                      {
+                        "version": "1.3.0",
+                        "previousVersion": "1.2.0",
+                        "classification": "major",
+                        "breakingChanges": [
+                          {
+                            "id": "chg-2",
+                            "rule": "response-property-removed",
+                            "description": "Response property 'userId' was removed from GET /users/{id}",
+                            "path": "/users/{id}/GET/response/200/userId",
+                            "category": "structural"
+                          }
+                        ],
+                        "safeChanges": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "unauthorized",
+                  "message": "Invalid API key",
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Spec or version not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "not_found",
+                  "message": "Version 1.3.0 not found for spec \"payments-api\"",
+                  "statusCode": 404
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "example": {
+                  "error": "internal_error",
+                  "message": "Internal server error",
+                  "statusCode": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/gateway-configs": {
       "get": {
         "operationId": "listGatewayConfigs",
@@ -3051,6 +3190,73 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/CompatReport"
+          }
+        }
+      },
+      "CompareStep": {
+        "type": "object",
+        "required": [
+          "version",
+          "previousVersion",
+          "classification",
+          "breakingChanges",
+          "safeChanges"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "example": "1.1.0"
+          },
+          "previousVersion": {
+            "type": "string",
+            "example": "1.0.0"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/VersionClassification"
+          },
+          "breakingChanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BreakingChange"
+            }
+          },
+          "safeChanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SafeChange"
+            }
+          }
+        }
+      },
+      "CompareVersionsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "object",
+            "required": [
+              "from",
+              "to",
+              "steps"
+            ],
+            "properties": {
+              "from": {
+                "type": "string",
+                "example": "1.0.0"
+              },
+              "to": {
+                "type": "string",
+                "example": "1.3.0"
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompareStep"
+                }
+              }
+            }
           }
         }
       },

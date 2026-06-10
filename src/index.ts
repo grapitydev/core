@@ -92,6 +92,7 @@ export type GetSpecResponse = components["schemas"]["GetSpecResponse"];
 export type ListVersionsResponse = components["schemas"]["VersionsPage"];
 export type GetVersionResponse = components["schemas"]["GetVersionResponse"];
 export type GetCompatReportResponse = components["schemas"]["GetCompatReportResponse"];
+export type CompareVersionsResponse = components["schemas"]["CompareVersionsResponse"];
 export type HealthResponse = components["schemas"]["HealthResponse"];
 export type SpecListItem = components["schemas"]["SpecListItem"];
 export type ApiError = components["schemas"]["ApiError"];
